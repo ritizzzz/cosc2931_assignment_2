@@ -47,9 +47,24 @@ public class LoginController {
 					user = model.getUserDao().getUser(username.getText(), password.getText());
 					if (user != null) {
 						model.setCurrentUser(user);
-						//  go to dashboard
-                        
-						
+						try {
+                            stage.close();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/HomeView.fxml"));
+                            
+                            HomeController homeController = new HomeController(stage, model);
+                
+                            loader.setController(homeController);
+                
+                            Parent root = loader.load();
+                
+                            homeController.showStage(root);
+                    
+                        } catch (IOException | RuntimeException e) {
+                            Scene scene = new Scene(new Label(e.getMessage()), 200, 100);
+                            stage.setTitle("Error");
+                            stage.setScene(scene);
+                            stage.show();
+                        }
 					} else {
 						message.setText("Wrong username or password");
 						message.setTextFill(Color.RED);

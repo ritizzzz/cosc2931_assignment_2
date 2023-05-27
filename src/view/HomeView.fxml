@@ -33,7 +33,7 @@
             <Label text="lastName" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button layoutX="522.0" layoutY="353.0" mnemonicParsing="false" text="Sign out" />
+      <Button fx:id="signout" layoutX="522.0" layoutY="353.0" mnemonicParsing="false" text="Sign out" />
       <GridPane layoutX="14.0" layoutY="82.0" prefHeight="251.0" prefWidth="322.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="40.0" />
