@@ -36,13 +36,17 @@ public class LoginController {
 		});
 		
 		signup.setOnAction(event -> {
-            message.setText("sign up clicked");
             try {
-            
+                stage.close();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SignupView.fxml"));
+                
+                SignupController signupController = new SignupController(stage);
+    
+                loader.setController(signupController);
+    
                 Parent root = loader.load();
-                stage.setScene(new Scene(root));
-                stage.show();
+    
+                signupController.showStage(root);
         
             } catch (IOException | RuntimeException e) {
                 Scene scene = new Scene(new Label(e.getMessage()), 200, 100);
@@ -50,25 +54,6 @@ public class LoginController {
                 stage.setScene(scene);
                 stage.show();
             }
-			// try {
-			// 	FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SignupView.fxml"));
-				
-			// 	// Customize controller instance
-			// 	SignupController signupController =  new SignupController(stage, model);
-
-			// 	loader.setController(signupController);
-			// 	VBox root = loader.load();
-				
-			// 	signupController.showStage(root);
-				
-			// 	message.setText("");
-			// 	name.clear();
-			// 	password.clear();
-				
-			// 	stage.close();
-			// } catch (IOException e) {
-			// 	message.setText(e.getMessage());
-			// }
         });
 	}
 
