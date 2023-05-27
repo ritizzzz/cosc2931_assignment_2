@@ -47,6 +47,7 @@ public class SignupController {
     public void initialize(){
         login.setOnAction(event -> {
             stage.close();
+            parentStage.getScene().lookup("#message").setVisible(false);
             parentStage.show();
         });
         createUser.setOnAction(event -> {

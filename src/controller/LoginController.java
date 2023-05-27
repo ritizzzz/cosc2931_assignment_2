@@ -42,13 +42,12 @@ public class LoginController {
 		login.setOnAction(event -> {
             message.setVisible(true);
             if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
-                Student student;
                 User user;
 				try {
 					user = model.getUserDao().getUser(username.getText(), password.getText());
 					if (user != null) {
 						model.setCurrentUser(user);
-						//  go to board
+						//  go to dashboard
                         
 						
 					} else {
