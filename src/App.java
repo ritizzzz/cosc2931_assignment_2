@@ -8,28 +8,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.Model;
  
 public class App extends Application {
-    
+    private Model model;
+
+	@Override
+	public void init() {
+		model = new Model();
+	}
+
+
     @Override
-    public void start(Stage primaryStage) throws IOException {
-     
-        
-        // Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
-        
-
-        // primaryStage.setTitle("Login");
-        // primaryStage.setScene(new Scene(root));
-        // primaryStage.show();
-
+    public void start(Stage primaryStage)  {
+ 
 
         try {
+            model.setup();
+
             
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/LoginView.fxml"));
 			
-			LoginController loginController = new LoginController(primaryStage);
+			LoginController loginController = new LoginController(primaryStage, model);
 
 			loader.setController(loginController);
 
@@ -37,12 +38,12 @@ public class App extends Application {
 
             loginController.showStage(root);
 	
-		} catch (IOException | RuntimeException e) {
+		} catch (IOException | RuntimeException  | SQLException e) {
 			Scene scene = new Scene(new Label(e.getMessage()), 200, 100);
 			primaryStage.setTitle("Error");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		}
+		} 
     }
  public static void main(String[] args) {
         launch(args);

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Database {
 	// URL pattern for database
-	private static final String DB_URL = "jdbc:sqlite:Enrollment.db";
+	private static final String DB_URL = "jdbc:sqlite:application.db";
 
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(DB_URL);

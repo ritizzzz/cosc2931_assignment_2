@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Model;
 
 public class LoginController {
     @FXML
@@ -26,10 +27,13 @@ public class LoginController {
     
     
     private Stage stage;
+    private Model model;
     
-    public  LoginController(Stage stage){
+    public  LoginController(Stage stage, Model model){
         this.stage = stage;
+        this.model = model;
     }
+    
     public void initialize() {		
 		login.setOnAction(event -> {
 			message.setText("Login clicked");
