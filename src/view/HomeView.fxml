@@ -28,9 +28,9 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label text="StudentNumber" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-            <Label text="First Name" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label text="lastName" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label fx:id="studentNumber" text="StudentNumber" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Label fx:id="firstName" text="First Name" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="lastName" text="lastName" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button fx:id="signout" layoutX="522.0" layoutY="353.0" mnemonicParsing="false" text="Sign out" />

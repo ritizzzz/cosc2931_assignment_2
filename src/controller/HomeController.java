@@ -4,13 +4,19 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Model;
 
 public class HomeController {
     @FXML
 	private Button signout;
-
+    @FXML
+    private Label studentNumber;
+    @FXML
+    private Label firstName;
+    @FXML
+    private Label lastName;
 
     private Stage stage;
     private Stage parentStage;
@@ -25,7 +31,11 @@ public class HomeController {
 
     
 	@FXML
-	public void initialize() {		
+	public void initialize() {	
+        studentNumber.setText(Integer.toString(model.getCurrentStudent().getStudentNumber()));
+        firstName.setText((model.getCurrentStudent().getFirstName()));
+        lastName.setText(model.getCurrentStudent().getLastName());
+
 		signout.setOnAction(event -> {
             stage.close();
             parentStage.getScene().lookup("#message").setVisible(false);

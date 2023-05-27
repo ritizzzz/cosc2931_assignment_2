@@ -58,6 +58,7 @@ public class SignupController {
                     try {
                         user = model.getUserDao().createUser(username.getText(), password.getText());
                         if (user != null) {
+                            model.getStudentDao().createStudent(firstname.getText(), lastname.getText(), username.getText());
                             status.setText("Created " + user.getUsername());
                             status.setTextFill(Color.GREEN);
                         } else {
@@ -65,6 +66,7 @@ public class SignupController {
                             status.setTextFill(Color.RED);
                         }
                     } catch (SQLException e) {
+                        System.out.println(e);
                         status.setText("Username already taken!");
                         status.setTextFill(Color.RED);
                     }

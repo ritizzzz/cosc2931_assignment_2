@@ -43,10 +43,13 @@ public class LoginController {
             message.setVisible(true);
             if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
                 User user;
+                Student student;
 				try {
 					user = model.getUserDao().getUser(username.getText(), password.getText());
+                    student = model.getStudentDao().getStudent(username.getText());
 					if (user != null) {
 						model.setCurrentUser(user);
+                        model.setCurrentStudent(student);
 						try {
                             stage.close();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/HomeView.fxml"));
