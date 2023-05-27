@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
+import model.Student;
+import model.User;
 
 public class LoginController {
     @FXML
@@ -33,10 +37,35 @@ public class LoginController {
         this.stage = stage;
         this.model = model;
     }
-    
+
     public void initialize() {		
 		login.setOnAction(event -> {
-			message.setText("Login clicked");
+            message.setVisible(true);
+            if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
+                Student student;
+                User user;
+				try {
+					user = model.getUserDao().getUser(username.getText(), password.getText());
+					if (user != null) {
+						model.setCurrentUser(user);
+						//  go to board
+                        
+						
+					} else {
+						message.setText("Wrong username or password");
+						message.setTextFill(Color.RED);
+					}
+				} catch (SQLException e) {
+					message.setText(e.getMessage());
+					message.setTextFill(Color.RED);
+				}
+				
+			} else {
+				message.setText("Empty username or password");
+				message.setTextFill(Color.RED);
+			}
+			username.clear();
+			password.clear();
 		});
 		
 		signup.setOnAction(event -> {
@@ -44,7 +73,7 @@ public class LoginController {
                 stage.close();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SignupView.fxml"));
                 
-                SignupController signupController = new SignupController(stage);
+                SignupController signupController = new SignupController(stage, model);
     
                 loader.setController(signupController);
     
@@ -63,7 +92,7 @@ public class LoginController {
 
     public void showStage(Parent root) {
 		Scene scene = new Scene(root);
-        // message.setVisible(false);
+        message.setVisible(false);
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.setTitle("Welcome");

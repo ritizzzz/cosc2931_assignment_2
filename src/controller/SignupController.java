@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -7,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Model;
+import model.User;
 
 public class SignupController {
 	@FXML
@@ -29,10 +34,12 @@ public class SignupController {
 	
 	private Stage stage;
     private Stage parentStage;
+    private Model model;
 
-    public SignupController(Stage parentStage){
+    public SignupController(Stage parentStage, Model model){
         this.stage = new Stage();
         this.parentStage = parentStage;
+        this.model = model;
 
     }
 
@@ -44,7 +51,30 @@ public class SignupController {
         });
         createUser.setOnAction(event -> {
             status.setVisible(true);
-            status.setText("sign up clicked");
+            if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
+                if (!firstname.getText().isEmpty() && !lastname.getText().isEmpty()) {
+                    User user;
+                    try {
+                        user = model.getUserDao().createUser(username.getText(), password.getText());
+                        if (user != null) {
+                            status.setText("Created " + user.getUsername());
+                            status.setTextFill(Color.GREEN);
+                        } else {
+                            status.setText("Cannot create user");
+                            status.setTextFill(Color.RED);
+                        }
+                    } catch (SQLException e) {
+                        status.setText("Username already taken!");
+                        status.setTextFill(Color.RED);
+                    }
+                }else{
+                    status.setText("Empty firstname or lastname");
+                    status.setTextFill(Color.RED);                    
+                }	
+			} else {
+				status.setText("Empty username or password");
+				status.setTextFill(Color.RED);
+			}
         });
     }
 
