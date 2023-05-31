@@ -52,14 +52,10 @@ public class LoginController {
                         model.setCurrentStudent(student);
 						try {
                             stage.close();
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/HomeView.fxml"));
-                            
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/HomeView.fxml"));    
                             HomeController homeController = new HomeController(stage, model);
-                
                             loader.setController(homeController);
-                
                             Parent root = loader.load();
-                
                             homeController.showStage(root);
                     
                         } catch (IOException | RuntimeException e) {
@@ -104,6 +100,7 @@ public class LoginController {
                 stage.setScene(scene);
                 stage.show();
             }
+            
         });
 	}
 

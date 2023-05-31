@@ -61,6 +61,10 @@ public class SignupController {
                             model.getStudentDao().createStudent(firstname.getText(), lastname.getText(), username.getText());
                             status.setText("Created " + user.getUsername());
                             status.setTextFill(Color.GREEN);
+                            username.clear();
+                            firstname.clear();
+                            lastname.clear();
+                            password.clear();
                         } else {
                             status.setText("Cannot create user");
                             status.setTextFill(Color.RED);
@@ -78,6 +82,7 @@ public class SignupController {
 				status.setText("Empty username or password");
 				status.setTextFill(Color.RED);
 			}
+
         });
     }
 

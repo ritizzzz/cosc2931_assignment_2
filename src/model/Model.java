@@ -52,4 +52,8 @@ public class Model {
 	public void setCurrentStudent(Student student) {
 		currentStudent = student;
 	}
+
+	public CourseDao getCourseDao(){
+		return courseDao;
+	}
 }

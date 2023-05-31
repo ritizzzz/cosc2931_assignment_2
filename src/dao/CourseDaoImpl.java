@@ -35,19 +35,21 @@ public class CourseDaoImpl implements CourseDao {
 	}
 
 	@Override
-	public Course getCourse(String courseName) throws SQLException {
-		String sql = "SELECT * FROM " + TABLE_NAME + " WHERE courseName = ?";
+	public HashSet<Course> fetchAllCourses() throws SQLException {
+        HashSet<Course> allCourses = new HashSet<>();
+		String sql = "SELECT * FROM " + TABLE_NAME + " ;";
 		try (Connection connection = Database.getConnection(); 
 				PreparedStatement stmt = connection.prepareStatement(sql);) {
-			stmt.setString(1, courseName);
 			try (ResultSet rs = stmt.executeQuery()) {
-				if (rs.next()) {
-					Course course = 
-                        new Course(rs.getString("courseName"), rs.getInt("capacity"), rs.getString("year"), rs.getString("delivery"), Days.valueOf(rs.getString("day").toUpperCase()), rs.getString("time"), rs.getDouble("duration"));
-					return course;
-				}
-				return null;
+                    for(int i = 0; i < getNumberOfCourses(); i++){
+        				if (rs.next()) {
+                            Course course = 
+                                new Course(rs.getString("courseName"), rs.getInt("capacity"), rs.getString("year"), rs.getString("delivery"), Days.valueOf(rs.getString("day").toUpperCase()), rs.getString("time"), rs.getDouble("duration"));
+                            allCourses.add(course);
+                        }
+                    }
 			} 
+            return allCourses;
 		}
 	}
     
