@@ -2,6 +2,8 @@ package model;
 
 import java.sql.SQLException;
 
+import dao.CourseDao;
+import dao.CourseDaoImpl;
 import dao.StudentDao;
 import dao.StudentDaoImpl;
 import dao.UserDao;
@@ -12,15 +14,19 @@ public class Model {
 	private User currentUser; 
 	private StudentDao studentDao;
 	private Student currentStudent; 
+	private CourseDao courseDao;
 	
 	public Model() {
 		userDao = new UserDaoImpl();
 		studentDao = new StudentDaoImpl();
+		courseDao = new CourseDaoImpl();
 	}
 	
 	public void setup() throws SQLException {
 		userDao.setup();
 		studentDao.setup();
+		courseDao.setup();
+		courseDao.populate();
 	}
 
 	public UserDao getUserDao() {

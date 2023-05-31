@@ -24,7 +24,6 @@ public class StudentDaoImpl implements StudentDao {
                           + "firstname VARCHAR(100) NOT NULL, "
                           + "lastname VARCHAR(100) NOT NULL, "
                           + "username VARCHAR(10) NOT NULL, FOREIGN KEY (username) REFERENCES users(username));";
-            System.out.println(sql);
 			stmt.executeUpdate(sql);
 		} 
 	}
